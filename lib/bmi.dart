@@ -1,7 +1,25 @@
 import 'package:flutter/material.dart';
 
-class bmii extends StatelessWidget {
-  const bmii({super.key});
+class Bmii extends StatefulWidget {
+  const Bmii({super.key});
+
+  @override
+  State<Bmii> createState() => _BmiiState();
+}
+
+class _BmiiState extends State<Bmii> {
+  final hcalc = TextEditingController();
+  final wcalc = TextEditingController();
+  double bmi=0;
+  String result="";
+  void bmiii() {
+    double h =double.parse(hcalc.text)/100;
+    double w =double.parse(wcalc.text);
+    double bmi=w/(h*h);
+    setState(() {
+      result="your BMI is ${bmi.toStringAsFixed(2)}";
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +58,7 @@ class bmii extends StatelessWidget {
                       children: [
                         SizedBox(height: 30),
                         TextField(
+                          controller: hcalc,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
@@ -52,6 +71,7 @@ class bmii extends StatelessWidget {
                         ),
                         SizedBox(height: 30),
                         TextField(
+                          controller: wcalc,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
@@ -73,11 +93,11 @@ class bmii extends StatelessWidget {
                             borderRadius: BorderRadiusGeometry.circular(10),
                           ),
                           child: TextButton(
-                            onPressed: () {},
+                            onPressed: () {bmiii();},
                             child: Text("Calculator"),
                           ),
                         ),
-                      ],
+                      Text(result)],
                     ),
                   ),
                 ),
